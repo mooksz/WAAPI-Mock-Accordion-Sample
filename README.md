@@ -1,7 +1,4 @@
 ## Running locally in development mode
-
-To get started, just clone the repository and run `npm install && npm run dev`:
-
 ```
 git clone https://github.com/mooksz/WAAPI-Mock-Accordion-Sample.git
 npm install
@@ -9,9 +6,6 @@ npm run dev
 ```
 
 ## Testing components
-
-If you want to run the jest tests, install packages and run `npm run test`
-
 ```
 git clone https://github.com/mooksz/WAAPI-Mock-Accordion-Sample.git
 npm install
