@@ -1,5 +1,5 @@
 import { act } from 'react-dom/test-utils';
-import { render, screen, logRoles, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { AccordionsList } from '../AccordionsList';
 import userEvent from '@testing-library/user-event';
 import { mockAnimationsApi } from 'jsdom-testing-mocks';
@@ -32,9 +32,46 @@ describe('AccordionsList', () => {
     });
 
     it('close an open accordion when another accordion is clicked', async () => {
-        const { debug, container } = setup(<AccordionsList items={items} />);
+        setup(<AccordionsList items={items} />);
 
-        const list = screen.getByRole('list');
+        const firstItemWrapper = screen.getByRole('button', { name: 'Accordion 1 Accordion 1 content' });
+        const firstItemDetails = within(firstItemWrapper).getByRole('group');
+        const secondItemWrapper = screen.getByRole('button', { name: 'Accordion 2 Accordion 2 content' });
+        const secondItemDetails = within(secondItemWrapper).getByRole('group');
+
+        expect(firstItemDetails.getAttribute('open')).toBeNull();
+
+        await act(async () => {
+            // Open first accordion
+            await userEvent.click(firstItemWrapper);
+            // Capture animation
+            const animation = firstItemDetails.getAnimations()[0];
+            // Wait for animation to finish
+            await animation.finished;
+        });
+
+        // assert if first accordion is open
+        expect(firstItemDetails.getAttribute('open')).not.toBeNull();
+
+        await act(async () => {
+            // Open second accordion
+            await userEvent.click(secondItemWrapper);
+        });
+
+        await act(async () => {
+            // Capture animation
+            const animation = firstItemDetails.getAnimations()[0];
+            // Wait for animation to finish
+            await animation.finished;
+        });
+
+        expect(firstItemDetails.getAttribute('open')).toBeNull();
+        expect(secondItemDetails.getAttribute('open')).not.toBeNull();
+    });
+
+    it('opens a second accordion without closing the current open accordion(s)', async () => {
+        setup(<AccordionsList multiExpand items={items} />);
+
         const firstItemWrapper = screen.getByRole('button', { name: 'Accordion 1 Accordion 1 content' });
         const firstItemDetails = within(firstItemWrapper).getByRole('group');
         const secondItemWrapper = screen.getByRole('button', { name: 'Accordion 2 Accordion 2 content' });
@@ -61,20 +98,11 @@ describe('AccordionsList', () => {
             const animation = secondItemDetails.getAnimations()[0];
             // Wait for animation to finish
             await animation.finished;
-
-            // Capture animation
-            const animationFirstItem = firstItemDetails.getAnimations();
-            console.log(
-                "Animation is not caputured here and doesn't run .onfinish method, so accordion attributes aren't updated either",
-            );
-            console.log(animationFirstItem);
-            debug();
-            // Wait for animation to finish
-            // await animationFirstItem.finished;
         });
 
-        // assert
-        // expect(firstItemDetails.getAttribute('open')).toBeNull();
-        // expect(secondItemDetails.getAttribute('open')).not.toBeNull();
+        // await act(async () => {});
+
+        expect(firstItemDetails.getAttribute('open')).not.toBeNull();
+        expect(secondItemDetails.getAttribute('open')).not.toBeNull();
     });
 });

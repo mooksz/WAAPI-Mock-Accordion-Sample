@@ -93,11 +93,6 @@ export const Accordion = (props: AccordionProps) => {
             },
         );
 
-        if (log) {
-            console.log('Animation is captured here');
-            console.log(currentAnimation, log);
-        }
-
         // Set animation state
         setAnimation(currentAnimation);
 
@@ -109,6 +104,7 @@ export const Accordion = (props: AccordionProps) => {
     };
 
     const expand = () => {
+        // console.log('opening');
         if (!detailsRef.current || !labelRef.current || !contentRef.current) return;
 
         detailsRef.current.style.height = `${detailsRef.current.offsetHeight}px`;
@@ -175,7 +171,7 @@ export const Accordion = (props: AccordionProps) => {
     // and the accordion is not set to multiExpand, shrink the accordion
     useEffect(() => {
         if (activeAccordion && id !== activeAccordion && !multiExpand && detailsRef.current?.open) {
-            shrink('Shrinking from useEffect');
+            shrink();
         }
     }, [activeAccordion, multiExpand]);
 
