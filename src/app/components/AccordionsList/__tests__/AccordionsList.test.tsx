@@ -56,9 +56,6 @@ describe('AccordionsList', () => {
         await act(async () => {
             // Open second accordion
             await userEvent.click(secondItemWrapper);
-        });
-
-        await act(async () => {
             // Capture animation
             const animation = firstItemDetails.getAnimations()[0];
             // Wait for animation to finish
@@ -99,8 +96,6 @@ describe('AccordionsList', () => {
             // Wait for animation to finish
             await animation.finished;
         });
-
-        // await act(async () => {});
 
         expect(firstItemDetails.getAttribute('open')).not.toBeNull();
         expect(secondItemDetails.getAttribute('open')).not.toBeNull();

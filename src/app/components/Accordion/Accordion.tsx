@@ -104,7 +104,6 @@ export const Accordion = (props: AccordionProps) => {
     };
 
     const expand = () => {
-        // console.log('opening');
         if (!detailsRef.current || !labelRef.current || !contentRef.current) return;
 
         detailsRef.current.style.height = `${detailsRef.current.offsetHeight}px`;
