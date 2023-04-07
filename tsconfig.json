@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@styles/*": ["./src/styles/*"],
+      "@components/*": ["./src/app/components/*"],
+      "@fonts/*": ["./src/fonts/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@images/*": ["./public/images/*"],
+      "@mytypes/*": ["./src/types/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@typeGuards/*": ["./src/lib/typeGuards/*"],
+      "@context/*": ["./src/context/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/context/AccordionsListContext.js", "src/context/AccordionsListContext.js"],
+  "exclude": ["node_modules"]
+}
