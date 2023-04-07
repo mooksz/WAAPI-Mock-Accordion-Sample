@@ -93,6 +93,11 @@ export const Accordion = (props: AccordionProps) => {
             },
         );
 
+        if (log) {
+            console.log('Animation is captured here');
+            console.log(currentAnimation, log);
+        }
+
         // Set animation state
         setAnimation(currentAnimation);
 
