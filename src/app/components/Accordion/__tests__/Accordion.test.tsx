@@ -35,6 +35,7 @@ describe('Accordion', () => {
             await animation.finished;
 
             // assert
+            expect(details).toBeInTheDocument();
             expect(details.getAttribute('open')).not.toBeNull();
         });
 
@@ -48,6 +49,7 @@ describe('Accordion', () => {
             await animation.finished;
 
             // assert
+            expect(details).toBeInTheDocument();
             expect(details.getAttribute('open')).toBeNull();
         });
     });

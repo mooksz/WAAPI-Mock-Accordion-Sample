@@ -50,6 +50,7 @@ describe('AccordionsList (Passing)', () => {
             await animation.finished;
 
             // Assert
+            expect(firstItemDetails).toBeInTheDocument();
             expect(firstItemDetails.getAttribute('open')).not.toBeNull();
         });
 
@@ -65,6 +66,8 @@ describe('AccordionsList (Passing)', () => {
 
         await waitFor(async () => {
             // Assert
+            expect(firstItemDetails).toBeInTheDocument();
+            expect(secondItemDetails).toBeInTheDocument();
             expect(firstItemDetails.getAttribute('open')).toBeNull();
             expect(secondItemDetails.getAttribute('open')).not.toBeNull();
         });
@@ -89,6 +92,7 @@ describe('AccordionsList (Passing)', () => {
             await animation.finished;
 
             // Assert
+            expect(firstItemDetails).toBeInTheDocument();
             expect(firstItemDetails.getAttribute('open')).not.toBeNull();
         });
 
@@ -102,6 +106,8 @@ describe('AccordionsList (Passing)', () => {
             await animation.finished;
 
             // Assert
+            expect(firstItemDetails).toBeInTheDocument();
+            expect(secondItemDetails).toBeInTheDocument();
             expect(firstItemDetails.getAttribute('open')).not.toBeNull();
             expect(secondItemDetails.getAttribute('open')).not.toBeNull();
         });

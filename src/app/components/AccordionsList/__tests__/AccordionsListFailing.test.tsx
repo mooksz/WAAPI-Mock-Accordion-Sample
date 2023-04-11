@@ -49,6 +49,7 @@ describe('AccordionsList (Failing)', () => {
             await animation.finished;
 
             // Assert
+            expect(firstItemDetails).toBeInTheDocument();
             expect(firstItemDetails.getAttribute('open')).not.toBeNull();
         });
 
@@ -62,6 +63,8 @@ describe('AccordionsList (Failing)', () => {
             await animation.finished;
 
             // Assert
+            expect(firstItemDetails).toBeInTheDocument();
+            expect(secondItemDetails).toBeInTheDocument();
             expect(firstItemDetails.getAttribute('open')).toBeNull();
             expect(secondItemDetails.getAttribute('open')).not.toBeNull();
         });
@@ -86,6 +89,7 @@ describe('AccordionsList (Failing)', () => {
             await animation.finished;
 
             // Assert
+            expect(firstItemDetails).toBeInTheDocument();
             expect(firstItemDetails.getAttribute('open')).not.toBeNull();
         });
 
@@ -99,6 +103,8 @@ describe('AccordionsList (Failing)', () => {
             await animation.finished;
 
             // Assert
+            expect(firstItemDetails).toBeInTheDocument();
+            expect(secondItemDetails).toBeInTheDocument();
             expect(firstItemDetails.getAttribute('open')).not.toBeNull();
             expect(secondItemDetails.getAttribute('open')).not.toBeNull();
         });
