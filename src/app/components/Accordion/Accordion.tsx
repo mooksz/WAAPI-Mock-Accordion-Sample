@@ -50,12 +50,12 @@ export const Accordion = (props: AccordionProps) => {
                 setActiveAccordion(id);
             }
 
-            expand();
+            window.requestAnimationFrame(() => expand());
             return;
         }
 
         if (isExpanding || detailsRef.current.open) {
-            shrink();
+            window.requestAnimationFrame(() => shrink());
             return;
         }
     };
@@ -88,6 +88,7 @@ export const Accordion = (props: AccordionProps) => {
                 height: [startHeight, endHeight],
             },
             {
+                id: 'shrink',
                 duration: 400,
                 easing: 'ease-out',
             },
@@ -133,6 +134,7 @@ export const Accordion = (props: AccordionProps) => {
                 height: [startHeight, endHeight],
             },
             {
+                id: 'grow',
                 duration: 400,
                 easing: 'ease-out',
             },

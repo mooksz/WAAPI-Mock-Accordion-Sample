@@ -1,5 +1,4 @@
-import { act } from 'react-dom/test-utils';
-import { screen, render } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Accordion } from '../Accordion';
 import { mockAnimationsApi } from 'jsdom-testing-mocks';
@@ -20,35 +19,36 @@ describe('Accordion', () => {
     });
 
     it('should open and close', async () => {
-        setup(<Accordion label="Label">Content</Accordion>);
+        const { user } = setup(<Accordion label="Label">Content</Accordion>);
 
         const wrapper = screen.getByRole('button');
         const details = screen.getByRole('group');
 
         expect(details.getAttribute('open')).toBeNull();
 
-        await act(async () => {
-            // Open accordion
-            await userEvent.click(wrapper);
+        await user.click(wrapper);
+
+        await waitFor(async () => {
             // Capture animation
             const animation = details.getAnimations()[0];
             // Wait for animation to finish
             await animation.finished;
+
+            // assert
+            expect(details.getAttribute('open')).not.toBeNull();
         });
 
-        // assert
-        expect(details.getAttribute('open')).not.toBeNull();
+        await user.click(wrapper);
 
-        await act(async () => {
+        await waitFor(async () => {
             // Close accordion
-            await userEvent.click(wrapper);
             // Capture animation
             const animation = details.getAnimations()[0];
             // Wait for animation to finish
             await animation.finished;
-        });
 
-        // assert
-        expect(details.getAttribute('open')).toBeNull();
+            // assert
+            expect(details.getAttribute('open')).toBeNull();
+        });
     });
 });
