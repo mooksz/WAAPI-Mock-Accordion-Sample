@@ -53,11 +53,11 @@ describe('AccordionsList (Failing)', () => {
             expect(firstItemDetails.getAttribute('open')).not.toBeNull();
         });
 
-        // Open second accordion
+        // Click on second accordion to open
         await user.click(secondItemWrapper);
 
         await waitFor(async () => {
-            // Capture animation
+            // Capture animation of first accordion
             const animation = firstItemDetails.getAnimations()[0];
             // Wait for animation to finish
             await animation.finished;
